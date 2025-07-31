@@ -3,6 +3,7 @@
 @import 'tailwindcss/utilities';
 
 /* Custom CSS for gentle animations and accessibility */
+/* Note: @apply directives are Tailwind CSS features and may show linter warnings in some IDEs */
 @layer base {
   html {
     font-family: 'Inter', sans-serif;
