@@ -1,0 +1,364 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+/* Custom CSS for gentle animations and accessibility */
+@layer base {
+  html {
+    font-family: 'Inter', sans-serif;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Nunito', sans-serif;
+  }
+  
+  /* Focus styles for accessibility */
+  *:focus-visible {
+    outline: 3px solid theme('colors.focus-blue');
+    outline-offset: 2px;
+  }
+  
+  /* Ensure minimum touch target size */
+  button, a, input, select, textarea {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  /* Smooth transitions */
+  * {
+    transition-duration: theme('transitionDuration.gentle');
+    transition-timing-function: ease-out;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-primary-teal text-white px-6 py-3 rounded-card font-medium hover:bg-opacity-90 focus:ring-2 focus:ring-focus-blue focus:ring-offset-2 transition-all duration-gentle;
+  }
+  
+  .btn-secondary {
+    @apply bg-accent-mango text-charcoal px-6 py-3 rounded-card font-medium hover:bg-opacity-90 focus:ring-2 focus:ring-focus-blue focus:ring-offset-2 transition-all duration-gentle;
+  }
+  
+  .card {
+    @apply bg-white rounded-card shadow-gentle p-4 transition-all duration-gentle hover:shadow-lg hover:scale-105;
+  }
+  
+  .mood-chip {
+    @apply bg-accent-mist text-charcoal px-4 py-2 rounded-full text-sm font-medium cursor-pointer transition-all duration-gentle hover:bg-primary-teal hover:text-white focus:ring-2 focus:ring-focus-blue;
+  }
+  
+  .mood-chip.active {
+    @apply bg-primary-teal text-white;
+  }
+}
+
+/* Dyslexia-friendly font option */
+.font-dyslexic {
+  font-family: 'OpenDyslexic', sans-serif !important;
+}
+
+/* Skip link for accessibility */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 6px;
+  background: theme('colors.primary-teal');
+  color: white;
+  padding: 8px;
+  text-decoration: none;
+  border-radius: 4px;
+  z-index: 1000;
+}
+
+.skip-link:focus {
+  top: 6px;
+}
+
+/* Gentle loading animation */
+@keyframes gentle-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+
+.loading-pulse {
+  animation: gentle-pulse 2s ease-in-out infinite;
+}
+
+/* Tiny confetti animation */
+@keyframes tiny-confetti {
+  0% { 
+    transform: translateY(0) rotate(0deg);
+    opacity: 1;
+  }
+  100% { 
+    transform: translateY(-100px) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+.confetti-piece {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: theme('colors.accent-mango');
+  animation: tiny-confetti 2s ease-out forwards;
+}
+
+/* 8px Grid System and Responsive Design */
+.grid-8 {
+  display: grid;
+  gap: 8px;
+}
+
+.grid-16 {
+  display: grid;
+  gap: 16px;
+}
+
+.grid-24 {
+  display: grid;
+  gap: 24px;
+}
+
+.grid-32 {
+  display: grid;
+  gap: 32px;
+}
+
+/* Responsive Book Grid - Mobile First */
+.book-grid {
+  display: grid;
+  gap: 24px;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+/* Tablet: 3 books per row */
+@media (min-width: 640px) {
+  .book-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Desktop: 4 books per row */
+@media (min-width: 768px) {
+  .book-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* Large Desktop: 5 books per row */
+@media (min-width: 1024px) {
+  .book-grid {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+
+/* Extra Large: 6 books per row */
+@media (min-width: 1280px) {
+  .book-grid {
+    grid-template-columns: repeat(6, 1fr);
+  }
+}
+
+/* Skeleton Loaders for Loading States */
+.skeleton {
+  background: linear-gradient(90deg, theme('colors.accent-mist') 25%, rgba(255,255,255,0.5) 50%, theme('colors.accent-mist') 75%);
+  background-size: 200% 100%;
+  animation: skeleton-loading 1.5s infinite;
+  border-radius: theme('borderRadius.card');
+}
+
+.skeleton-text {
+  height: 16px;
+  margin-bottom: 8px;
+  border-radius: 4px;
+}
+
+.skeleton-text.short {
+  width: 75%;
+}
+
+.skeleton-text.medium {
+  width: 50%;
+}
+
+.skeleton-card {
+  aspect-ratio: 3/4;
+  margin-bottom: 16px;
+}
+
+@keyframes skeleton-loading {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/* Gentle Micro-animations */
+.hover-lift {
+  transition: transform 150ms ease-out;
+}
+
+.hover-lift:hover {
+  transform: translateY(-2px) scale(1.02);
+}
+
+.fade-in {
+  animation: fade-in 200ms ease-out;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Content Width Constraint */
+.max-w-content {
+  max-width: 1120px;
+}
+
+/* Generous Whitespace */
+.space-generous > * + * {
+  margin-top: 32px;
+}
+
+.space-gentle > * + * {
+  margin-top: 16px;
+}
+
+/* Additional Accessibility Enhancements */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  
+  .skeleton {
+    animation: none;
+    background: theme('colors.accent-mist');
+  }
+  
+  .hover-lift:hover {
+    transform: none;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .text-charcoal {
+    color: #000000;
+  }
+  
+  .bg-white {
+    background-color: #ffffff;
+    border: 1px solid #000000;
+  }
+  
+  .btn-primary {
+    background-color: #000000;
+    color: #ffffff;
+    border: 2px solid #000000;
+  }
+  
+  .btn-secondary {
+    background-color: #ffffff;
+    color: #000000;
+    border: 2px solid #000000;
+  }
+  
+  .mood-chip {
+    border: 2px solid #000000;
+  }
+}
+
+/* Screen reader only utilities */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.focus\:not-sr-only:focus {
+  position: static;
+  width: auto;
+  height: auto;
+  padding: inherit;
+  margin: inherit;
+  overflow: visible;
+  clip: auto;
+  white-space: normal;
+}
+
+/* Enhanced keyboard navigation */
+.book-card:focus-within {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  outline: 2px solid theme('colors.focus-blue');
+  outline-offset: 2px;
+}
+
+/* Better focus indicators for interactive elements */
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid theme('colors.focus-blue');
+  outline-offset: 2px;
+}
+
+/* Ensure sufficient color contrast for links */
+a:not(.btn-primary):not(.btn-secondary) {
+  color: theme('colors.primary-teal');
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 2px;
+}
+
+a:not(.btn-primary):not(.btn-secondary):hover {
+  color: theme('colors.primary-teal');
+  text-decoration-thickness: 3px;
+}
+
+/* ARIA live region styling */
+[aria-live] {
+  position: absolute;
+  left: -10000px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+/* Focus trap styling for modals/dialogs */
+.focus-trap {
+  position: relative;
+}
+
+.focus-trap::before,
+.focus-trap::after {
+  content: '';
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
