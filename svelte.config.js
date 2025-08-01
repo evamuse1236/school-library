@@ -14,6 +14,15 @@ const config = {
 		}),
 		paths: {
 			base: process.env.NODE_ENV === 'production' ? '/school-library' : ''
+		},
+		prerender: {
+			entries: [
+				'/',
+				'/discover',
+				'/enter',
+				'/myshelf'
+			],
+			handleMissingId: 'warn'
 		}
 	}
 };
